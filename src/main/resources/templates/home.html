@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header('This is the home page')">
+    <meta charset="UTF-8" />
+    <title>Home</title>
+</head>
+<body>
+<div th:replace="partials/navbar::navbar"></div>
+<br/>
+<br/>
+
+<h1>Hello, <span th:text="${name}">World</span>!</h1>
+<div th:replace="partials/footer :: footer"></div>
+
+</body>
+</html>
