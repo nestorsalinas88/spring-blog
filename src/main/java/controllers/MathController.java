@@ -5,7 +5,7 @@ url	response
 /multiply/4/and/5	20
 /divide/6/by/3	2
  */
-package com.codeup.blog;
+package controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,27 +17,28 @@ public class MathController {
 
     @GetMapping("/add/{x}/and/{y}")
     public @ResponseBody
-    int addition(@PathVariable int x, @PathVariable int y){
-        return x + y;
+    String addition(@PathVariable int x, @PathVariable int y){
+        return String.format("%d + %d = %d",x,y,x + y);
     }
 
 
     @GetMapping("/subtract/{x}/and/{y}")
     @ResponseBody
-    public int subtract(@PathVariable int x, @PathVariable int y) {
-        return x - y;
+    public String subtract(@PathVariable int x, @PathVariable int y) {
+        return String.format("%d - %d = %d",x,y , x - y);
     }
 
     @GetMapping("/multiply/{x}/and/{y}")
     @ResponseBody
-    public int multiply(@PathVariable int x, @PathVariable int y) {
-        return x * y;
+    public String multiply(@PathVariable int x, @PathVariable int y) {
+        return String.format("%d * %d = %d",x,y , x * y);
     }
 
     @GetMapping("/divide/{x}/by/{y}")
     @ResponseBody
-    public int divide(@PathVariable int x, @PathVariable int y) {
-        return x / y;
+    public String divide(@PathVariable int x, @PathVariable int y) {
+        return String.format("%d / %d = %d",x,y , x / y);
+
     }
 
 

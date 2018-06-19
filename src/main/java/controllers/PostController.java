@@ -4,7 +4,7 @@ GET	/posts/{id}	view an individual post
 GET	/posts/create	view the form for creating a post
 POST	/posts/create	create a new post
 */
-package com.codeup.blog;
+package controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
