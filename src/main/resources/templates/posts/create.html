@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="partials/header :: header('Your Post')"/>
+<body>
+<div th:replace="partials/navbar::navbar"></div>
+
+
+<div class="container">
+
+  <!--this is a form to create new posts-->
+    <form action="/posts/create" method="post">
+        Title:
+        <input name="title" />
+        <br />
+        Description:
+        <input type="text" name="description" />
+        <br />
+        <input type="submit" />
+    </form>
+
+
+</div>
+
+
+
+
+
+<div th:replace="partials/footer :: footer"></div>
+</body>
+</html>

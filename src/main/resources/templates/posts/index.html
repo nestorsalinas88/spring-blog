@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="partials/header :: header('Your Post')"/>
+<body>
+<div th:replace="partials/navbar::navbar"></div>
+
+<!--this is where you can see all the entries by all users-->
+<div class="container">
+
+    <h1 >Posts</h1>
+    <!--this is where the posts will be displayed in a list form -->
+    <div class="card" style="width: 18rem;" th:each="post : ${posts}">
+        <img class="card-img-top" src="..." alt="Card image cap"/>
+        <div class="card-body">
+            <h5 class="card-title" th:text="${post.title}"></h5>
+            <p class="card-text" th:text="${post.body}" ></p>
+            <a href="#" class="btn btn-primary">Open the complete article</a>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<div th:replace="partials/footer :: footer"></div>
+</body>
+</html>
