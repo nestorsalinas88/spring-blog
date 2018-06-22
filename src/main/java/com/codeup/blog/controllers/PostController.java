@@ -22,27 +22,23 @@ public class PostController {
     // Dependency Injection
 
     public PostController(PostService postService) {
+
         this.postService = postService;
     }
 
     // mappings are the url
     @GetMapping("/posts")
     public String index(Model view) {
-
-        List<Post> posts = postService.findAll();
-
-        view.addAttribute("posts", posts);
+        view.addAttribute("posts", postService.findAll());
 
         // relative path for the .html file inside of resources/templates w/o the .html
-        return "posts/index";
+        return "/posts/index";
     }
 
 
     @GetMapping("/posts/{id}")
     public String showDetails(@PathVariable long id, Model view) {
-
         Post post = postService.findOne(id);
-
         view.addAttribute("post", post);
 
         return "posts/show";
@@ -61,10 +57,12 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public @ResponseBody String savePost(@ModelAttribute Post post) {
+    public String savePost(@ModelAttribute Post post) {
+        postService.save(post);
 
         System.out.println("post.title:" + post.getTitle());
-        return "posts/index";
+        System.out.println("post.body:" + post.getBody());
+        return "redirect:/posts";
     }
 
 
