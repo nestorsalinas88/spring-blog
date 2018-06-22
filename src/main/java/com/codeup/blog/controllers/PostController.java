@@ -40,14 +40,27 @@ public class PostController {
     public String showDetails(@PathVariable long id, Model view) {
         Post post = postService.findOne(id);
         view.addAttribute("post", post);
+        postService.save(post);
 
         return "posts/show";
     }
 
     @GetMapping("/posts/{id}/edit")
-    public @ResponseBody String edit(@PathVariable long id) {
-        return "View the form for editing post #" + id;
+    public String edit(@PathVariable long id, Model view) {
+        view.addAttribute("post", postService.findOne(id));
+
+
+        return "posts/edit";
     }
+
+    @PostMapping("/posts/{id}/edit")
+    public String refresh(@ModelAttribute Post post){
+        postService.update(post);
+
+        return "redirect:/posts";
+    }
+
+
 
     @GetMapping("/posts/create")
     public String create(Model view) {

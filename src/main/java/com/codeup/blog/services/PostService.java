@@ -11,20 +11,6 @@ import java.util.List;
 public class PostService {
     private List<Post> posts;
 
-    public PostService() {
-        this.posts = new ArrayList<>();
-        createPosts();
-    }
-
-    public List<Post> findAll() {
-
-        return posts;
-    }
-    public Post getPost(long id){
-        return posts.get((int) id - 1);
-    }
-
-
     private void createPosts() {
         posts.add(new Post(1, "This is a title", "this is the body!"));
         posts.add(new Post(2, "This is a title", "this is the body!"));
@@ -35,6 +21,15 @@ public class PostService {
         posts.add(new Post(7, "This is a title", "this is the body!"));
     }
 
+    public PostService() {
+        this.posts = new ArrayList<>();
+        createPosts();
+    }
+
+    public List<Post> findAll() {
+        return posts;
+    }
+
 
     public Post save(Post post) {
         post.setId(posts.size() + 1);
@@ -43,6 +38,18 @@ public class PostService {
     }
 
     public Post findOne(long id) {
+
+        return posts.get((int) id - 1);
+    }
+
+    public void update(Post post){
+        posts.add(post);
+
+    }
+
+
+
+    public Post getPost(long id){
         return posts.get((int) id - 1);
     }
 
