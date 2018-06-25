@@ -4,7 +4,7 @@ package com.codeup.blog.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "post")
 public class Post {
 
     @Id @GeneratedValue
@@ -15,6 +15,14 @@ public class Post {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
+
+    @Column(nullable = false)
+    private int status;
+
+
+    @ManyToOne @JoinColumn(name = "user_id")
+    private User user;
+
 
     public Post() {}
 
@@ -30,6 +38,21 @@ public class Post {
         this.body = body;
 
 
+    }
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 

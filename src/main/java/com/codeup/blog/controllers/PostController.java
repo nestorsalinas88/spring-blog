@@ -6,7 +6,9 @@ POST	/posts/create	create a new post
 */
 package com.codeup.blog.controllers;
 import com.codeup.blog.models.Post;
+import com.codeup.blog.repositories.UserRepo;
 import com.codeup.blog.services.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +18,30 @@ import java.util.List;
 @Controller
 public class PostController {
 
-    private PostService postService;
+
+//    this is where you need to declare a data access object
+    private final PostService postService;
+
+    private UserRepo userRepo;
+
+
 
     // PostController constructor
     // Dependency Injection
 
-    public PostController(PostService postService) {
+    @Autowired
+    public PostController(PostService postService, UserRepo userRepo) {
 
         this.postService = postService;
+        this.userRepo = userRepo;
     }
+
+
 
     // mappings are the url
     @GetMapping("/posts")
     public String index(Model view) {
         view.addAttribute("posts", postService.findAll());
-
         // relative path for the .html file inside of resources/templates w/o the .html
         return "/posts/index";
     }
@@ -46,20 +57,18 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}/edit")
-    public String edit(@PathVariable long id, Model view) {
+    public String edit(@ModelAttribute Post post,@PathVariable long id, Model view) {
+        post.setId(id);
         view.addAttribute("post", postService.findOne(id));
-
-
         return "posts/edit";
     }
 
     @PostMapping("/posts/{id}/edit")
     public String refresh(@ModelAttribute Post post){
-        postService.update(post);
+        postService.save(post);
 
         return "redirect:/posts";
     }
-
 
 
     @GetMapping("/posts/create")

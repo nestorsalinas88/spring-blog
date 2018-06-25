@@ -49,8 +49,8 @@ public class PostService {
 
 
 
-    public Post getPost(long id){
-        return posts.get((int) id - 1);
-    }
+//    public List<Post> search(String searchTerm){
+//        return posts.de("%" + searchTerm + "%");
+//    }
 
 }
