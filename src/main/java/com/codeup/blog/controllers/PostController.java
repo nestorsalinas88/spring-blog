@@ -20,7 +20,7 @@ public class PostController {
 
 
 //    this is where you need to declare a data access object
-    private final PostService postService;
+    private PostService postService;
 
     private UserRepo userRepo;
 
