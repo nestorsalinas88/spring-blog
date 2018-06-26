@@ -43,7 +43,7 @@ public class PostController {
     public String index(Model view) {
         view.addAttribute("posts", postService.findAll());
         // relative path for the .html file inside of resources/templates w/o the .html
-        return "/posts/index";
+        return "posts/index";
     }
 
 
