@@ -5,8 +5,8 @@
 <div th:replace="partials/navbar::navbar"></div>
 
 <!--this is where you can see all the entries by all users-->
-<div id='root'>aqui</div>
-<div id='viva'></div>
+<div id='root'>.</div>
+
 
 
 
@@ -16,10 +16,6 @@
     <div class="card" style="width: 18rem;" th:each="post : ${posts}">
         <img class="card-img-top" src="#" alt="Card image cap"/>
         <div class="card-body">
-
-            <a href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-outline-primary">Edit</a>
-
-
             <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="get" class="delete">
             <button class="btn btn-outline-danger float-right" type="submit">X</button>
             </form>
@@ -27,7 +23,7 @@
             <h5 class="card-title" th:text="${post.title}"></h5>
             <p class="card-text" th:text="${post.body}" ></p>
             <br/>
-            <form th:action="@{'/posts/' + ${post.id} + '/edit'}" method="get" class="delete">
+            <form th:action="@{'/posts/' + ${post.id} + '/edit'}" method="get" class="edit">
                 <button class="btn btn-outline-primary" type="submit">Edit</button>
             </form>
         </div>

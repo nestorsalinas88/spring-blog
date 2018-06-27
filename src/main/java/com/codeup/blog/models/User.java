@@ -5,23 +5,24 @@ import java.util.List;
 
 
 @Entity
+//This tables name should be plural hence the multiple 'users'
 @Table(name="user")
 public class User {
 
     @Id @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
-    private int role;
-
-    @Column(nullable = false)
-    private int status;
-
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
 
     @Column(nullable = false)
     private String password;
@@ -31,13 +32,41 @@ public class User {
     private List<Post> post;
 
 
-    public User( String username, String email, String password) {
+    public User(long id, String username, String email, String password, String firstName, String lastName) {
+        this.id = id;
         this.username = username;
         this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
     }
+
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        username = copy.username;
+        email = copy.email;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+        password = copy.password;
+    }
+
     public User() {}
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public long getId() {
         return id;
@@ -71,21 +100,6 @@ public class User {
         this.password = password;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public List<Post> getPost() {
         return post;

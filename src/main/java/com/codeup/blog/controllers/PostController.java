@@ -10,6 +10,7 @@ import com.codeup.blog.models.User;
 import com.codeup.blog.repositories.UserRepo;
 import com.codeup.blog.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -62,6 +63,8 @@ public class PostController {
 
     @GetMapping("/posts/{id}/edit")
     public String edit(@PathVariable long id, Model view) {
+
+        
         Post post = postService.findOne(id);
         view.addAttribute("post", post);
         return "posts/edit";
@@ -87,8 +90,8 @@ public class PostController {
     @PostMapping("/posts/create")
     public String savePost(@ModelAttribute Post post) {
 
-        User user;
-//        post.setUser(user);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(user);
 //
 //        System.out.println("post.title:" + post.getTitle());
 //        System.out.println("post.body:" + post.getBody());

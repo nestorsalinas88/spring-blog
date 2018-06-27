@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="partials/header :: header('Your Post')"></div>
+<body>
+<div th:replace="partials/navbar::navbar"></div>
+
+
+<div class="container">
+
+    <!--this is a form to create new posts-->
+
+    <form th:action="@{users/sign-up}" method="post" th:object="${user}">
+
+        <label for="firstName">first name:</label>
+        <input id="firstName" th:field="*{firstName}"/>
+        <br/>
+        <label for="lastName">last name:</label>
+        <input id="lastName" th:field="*{lastName}"/>
+        <br/>
+        <label for="username">Username</label>
+        <input id="username" th:field="*{username}" />
+        <br/>
+        <label for="email">email:</label>
+        <input id="email" th:field="*{email}"/>
+        <br/>
+        <label for="password">Password</label>
+        <input id="password" th:field="*{password}" />
+        <br/>
+        <input type="submit" value="sign up" />
+    </form>
+
+</div>
+<div th:replace="partials/footer :: footer"></div>
+</body>
+
+
+
+</html>
