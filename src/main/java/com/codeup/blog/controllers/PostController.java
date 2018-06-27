@@ -6,6 +6,7 @@ POST	/posts/create	create a new post
 */
 package com.codeup.blog.controllers;
 import com.codeup.blog.models.Post;
+import com.codeup.blog.models.User;
 import com.codeup.blog.repositories.UserRepo;
 import com.codeup.blog.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,22 +52,27 @@ public class PostController {
     public String showDetails(@PathVariable long id, Model view) {
         Post post = postService.findOne(id);
         view.addAttribute("post", post);
+
+//        where is this going? ||
+
         postService.save(post);
 
         return "posts/show";
     }
 
     @GetMapping("/posts/{id}/edit")
-    public String edit(@ModelAttribute Post post,@PathVariable long id, Model view) {
-        post.setId(id);
-        view.addAttribute("post", postService.findOne(id));
+    public String edit(@PathVariable long id, Model view) {
+        Post post = postService.findOne(id);
+        view.addAttribute("post", post);
         return "posts/edit";
     }
 
     @PostMapping("/posts/{id}/edit")
-    public String refresh(@ModelAttribute Post post){
-        postService.save(post);
+    public String refresh(@ModelAttribute Post post, @PathVariable long id){
 
+
+        post.setId(id);
+        postService.save(post);
         return "redirect:/posts";
     }
 
@@ -80,10 +86,14 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String savePost(@ModelAttribute Post post) {
-        postService.save(post);
 
-        System.out.println("post.title:" + post.getTitle());
-        System.out.println("post.body:" + post.getBody());
+        User user;
+//        post.setUser(user);
+//
+//        System.out.println("post.title:" + post.getTitle());
+//        System.out.println("post.body:" + post.getBody());
+
+        postService.save(post);
         return "redirect:/posts";
     }
 

@@ -39,6 +39,19 @@ public class Post {
 
 
     }
+
+    public Post(long id, String title, String body, int status, User user){
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.status = status;
+        this.user = user;
+
+
+
+    }
+
+
     public int getStatus() {
         return status;
     }

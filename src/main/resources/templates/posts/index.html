@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="partials/header :: header('Your Post')"/>
+<div th:replace="partials/header :: header('Your Post')"></div>
 <body>
 <div th:replace="partials/navbar::navbar"></div>
 
 <!--this is where you can see all the entries by all users-->
 <div id='root'>aqui</div>
-
+<div id='viva'></div>
 
 
 
 <div class="container">
-
-    <h1 >Posts</h1>
+    <h1 >Look at my post</h1>
     <!--this is where the posts will be displayed in a list form -->
     <div class="card" style="width: 18rem;" th:each="post : ${posts}">
         <img class="card-img-top" src="#" alt="Card image cap"/>
         <div class="card-body">
+
+            <a href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-outline-primary">Edit</a>
+
+
+            <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="get" class="delete">
+            <button class="btn btn-outline-danger float-right" type="submit">X</button>
+            </form>
+            <br/>
             <h5 class="card-title" th:text="${post.title}"></h5>
             <p class="card-text" th:text="${post.body}" ></p>
-            <a href="#" class="btn btn-primary">Open the complete article</a>
+            <br/>
+            <form th:action="@{'/posts/' + ${post.id} + '/edit'}" method="get" class="delete">
+                <button class="btn btn-outline-primary" type="submit">Edit</button>
+            </form>
         </div>
     </div>
-
-
-
 </div>
 
 
