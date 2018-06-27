@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <div th:replace="partials/header :: header('Your Post')"></div>
 <body>
 <div th:replace="partials/navbar::navbar"></div>
 
 
-<div class="container">
+
+<div class="container" >
 
     <!--this is a form to create new posts-->
     <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="POST" th:object="${post}" id="editPost">
         <label for="title">title</label>
-        <input type="text" name="title" id="title"/>
+        <input type="text" name="title" id="title" th:field="*{title}"/>
         <br />
         <label for="body">Body</label>
-        <input type="text" name="body" id="body"/>
+        <input type="text" name="body" id="body" th:field="*{body}"/>
         <br />
         <input type="submit" />
     </form>

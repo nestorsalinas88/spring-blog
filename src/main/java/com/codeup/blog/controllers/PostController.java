@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -22,9 +24,9 @@ public class PostController {
 
 
 //    this is where you need to declare a data access object
-    private PostService postService;
+    private final PostService postService;
 
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
 
 
 
@@ -49,6 +51,7 @@ public class PostController {
     }
 
 
+
     @GetMapping("/posts/{id}")
     public String showDetails(@PathVariable long id, Model view) {
         Post post = postService.findOne(id);
@@ -61,22 +64,33 @@ public class PostController {
         return "posts/show";
     }
 
+
+
     @GetMapping("/posts/{id}/edit")
     public String edit(@PathVariable long id, Model view) {
 
-        
+        User session = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepo.findById(session.getId());
         Post post = postService.findOne(id);
-        view.addAttribute("post", post);
-        return "posts/edit";
+
+        if(post.getUser().getId() == user.getId()){
+            view.addAttribute("post", post);
+            return "posts/edit";
+        } else  {
+
+            return "redirect:/posts";
+        }
+
     }
 
     @PostMapping("/posts/{id}/edit")
-    public String refresh(@ModelAttribute Post post, @PathVariable long id){
+    public String refresh(@Valid Post post, @PathVariable long id){
 
 
-        post.setId(id);
-        postService.save(post);
-        return "redirect:/posts";
+            post.setUser(postService.findOne(id).getUser());
+            postService.save(post);
+            return "redirect:/posts";
+
     }
 
 
