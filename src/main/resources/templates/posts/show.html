@@ -14,10 +14,20 @@
 </div>
 
 <div class="container">
+    <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="get" class="delete">
+        <button class="btn btn-outline-danger float-right" type="submit">X</button>
+    </form>
+    <br/>
+
     <h1 th:text="${post.title}"/>
     <p th:text="${post.body}"/>
 
     <p th:text="${post.id}" />
+    <br/>
+
+    <form th:action="@{'/posts/' + ${post.id} + '/edit'}" method="get" class="edit">
+        <button class="btn btn-outline-primary" type="submit">Edit</button>
+    </form>
 </div>
 
 

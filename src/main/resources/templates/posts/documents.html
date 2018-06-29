@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="partials/header :: header('Your Post')"></div>
+<body>
+<div th:replace="partials/navbar::navbar"></div>
+
+<form id="upload-form" th:fragment="uploader" th:action="@{./fileupload(${_csrf.parameterName}=${_csrf.token})}"
+      method="post" enctype="multipart/form-data">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button type="submit" class="submit-upload" value="Upload"> Upload </button>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" name="file" id="file"/>
+            <label class="custom-file-label" for="file">Choose file</label>
+        </div>
+    </div>
+</form>
+
+
+
+
+<div th:replace="partials/footer :: footer"></div>
+</body>
+</html>

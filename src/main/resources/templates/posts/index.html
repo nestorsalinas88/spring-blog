@@ -16,16 +16,10 @@
     <div class="card" style="width: 18rem;" th:each="post : ${posts}">
         <img class="card-img-top" src="#" alt="Card image cap"/>
         <div class="card-body">
-            <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="get" class="delete">
-            <button class="btn btn-outline-danger float-right" type="submit">X</button>
-            </form>
-            <br/>
+
             <h5 class="card-title" th:text="${post.title}"></h5>
             <p class="card-text" th:text="${post.body}" ></p>
-            <br/>
-            <form th:action="@{'/posts/' + ${post.id} + '/edit'}" method="get" class="edit">
-                <button class="btn btn-outline-primary" type="submit">Edit</button>
-            </form>
+            <a th:href="@{/posts/{id}(id=${post.id})}" class="card-link" >More</a>
         </div>
     </div>
 </div>

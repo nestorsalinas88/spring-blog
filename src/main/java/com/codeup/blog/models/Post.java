@@ -1,7 +1,10 @@
 package com.codeup.blog.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -16,12 +19,16 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
-    @Column(nullable = false)
-    private int status;
+    @Column
+    private boolean status;
 
 
     @ManyToOne @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "post")
+    @JsonBackReference(value = "post-documents")
+    private List<Document> documents;
 
 
     public Post() {}
@@ -40,7 +47,7 @@ public class Post {
 
     }
 
-    public Post(long id, String title, String body, int status, User user){
+    public Post(long id, String title, String body, boolean status, User user){
         this.id = id;
         this.title = title;
         this.body = body;
@@ -50,13 +57,19 @@ public class Post {
 
 
     }
+    public Post(User user, String title, String body, List<Document> documents) {
+        this.user = user;
+        this.title = title;
+        this.body = body;
+        this.documents = documents;
+    }
 
 
-    public int getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -94,5 +107,19 @@ public class Post {
         this.body = body;
     }
 
+    @JsonProperty
+    public List<Document> getDocuments() { return documents; }
 
+
+    public void addDocument(Document document) {
+        this.documents.add(document);
+    }
+
+
+    public void setDocuments(List<Document> documents) {
+        for(Document document : documents) {
+            document.setPost(this);
+        }
+        this.documents = documents;
+    }
 }
