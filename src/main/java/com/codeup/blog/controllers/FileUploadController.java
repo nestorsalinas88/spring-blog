@@ -26,7 +26,7 @@ public class FileUploadController {
 
     @GetMapping("/posts/fileupload")
     public String showUploadFileForm() {
-        return "/posts/fileupload";
+        return "posts/fileupload";
     }
 
     @PostMapping("/posts/fileupload")

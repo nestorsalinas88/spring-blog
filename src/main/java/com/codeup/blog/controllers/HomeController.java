@@ -5,9 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Controller
 public class HomeController {
@@ -28,20 +25,20 @@ public class HomeController {
     }
 
 
-
-    @GetMapping("/home/users")
-    public String welcomeUsers(Model model){
-        List<String> users = new ArrayList<>();
-        users.add("Nestor");
-        users.add("Jake");
-        users.add("Brain");
-        users.add("John");
-
-        model.addAttribute("users", users);
-        return "home";
-
-
-    }
+//
+//    @GetMapping("/home/users")
+//    public String welcomeUsers(Model model){
+//        List<String> users = new ArrayList<>();
+//        users.add("Nestor");
+//        users.add("Jake");
+//        users.add("Brain");
+//        users.add("John");
+//
+//        model.addAttribute("users", users);
+//        return "home";
+//
+//
+//    }
 
 
 

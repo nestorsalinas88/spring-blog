@@ -27,6 +27,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-java-client</artifactId>
+			<version>1.0.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -64,8 +70,8 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-	</dependencies>
 
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>

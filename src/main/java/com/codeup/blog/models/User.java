@@ -19,46 +19,32 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
-
-    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private Integer role;
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> post;
 
 
-    public User(long id, String username, String email, String password, String firstName, String lastName) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-    }
-
-    public User(String username, String email, String password, String firstName, String lastName) {
-        this.username = username;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-    }
-
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         username = copy.username;
         email = copy.email;
-        firstName = copy.firstName;
-        lastName = copy.lastName;
         password = copy.password;
     }
 
-    public User() {}
+    public User(long id, String username, String email, String password, int role) {
+        this.id = id;
+        this.username = username;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+    }
+
+//    public User() {}
 
 
     public long getId() {
@@ -102,19 +88,4 @@ public class User {
         this.post = post;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 }
