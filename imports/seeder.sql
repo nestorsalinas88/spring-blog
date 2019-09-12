@@ -1,33 +1,36 @@
+
+create database blog_db;
+
 use blog_db;
 
-
-drop table if exists documents;
-drop table if exists posts;
-drop table if exists user_roles;
-drop table if exists users;
-
-create table users(
-id int unsigned not null auto_increment,
-role tinyint(1),
-username varchar(240) not null,
-email varchar(240) not null,
-password varchar(120) not null,
-primary key (id)
-);
-
-
-create table posts (
-id int unsigned not null auto_increment,
-user_id int unsigned not null,
-title varchar(30) not null,
-body varchar(1000) not null,
-category varchar(100) not null,
-status tinyint(1) not null,
-image varchar(512),
-foreign key (user_id) references users(id)
-on delete cascade,
-primary key (id)
-);
+#
+# drop table if exists documents;
+# drop table if exists posts;
+# drop table if exists user_roles;
+# drop table if exists users;
+#
+# create table users(
+# id int unsigned not null auto_increment,
+# role tinyint(1),
+# username varchar(240) not null,
+# email varchar(240) not null,
+# password varchar(120) not null,
+# primary key (id)
+# );
+#
+#
+# create table posts (
+# id int unsigned not null auto_increment,
+# user_id int unsigned not null,
+# title varchar(30) not null,
+# body varchar(1000) not null,
+# category varchar(100) not null,
+# status tinyint(1) not null,
+# image varchar(512),
+# foreign key (user_id) references users(id)
+# on delete cascade,
+# primary key (id)
+# );
 
 INSERT INTO `users` (`role`,`username`,`email`,`password`) VALUES (2,"Kibo","Curabitur.vel.lectus@antedictum.net","Lectus A Associates"),(0,"Keefe","eleifend@porttitor.ca","Enim Institute"),(1,"Darius","orci.lacus@tristiquepharetra.edu","Morbi Tristique Ltd"),(0,"Ezra","a@magnanecquam.co.uk","Gravida Sagittis Duis Incorporated"),(1,"Knox","nulla@dolorFuscefeugiat.co.uk","Facilisis Facilisis Magna Corporation"),(0,"Upton","ante.blandit.viverra@ullamcorper.com","Consectetuer Euismod Industries"),(2,"Zachery","egestas@dolorelit.co.uk","Augue Malesuada PC"),(2,"Shad","id.libero@Classaptenttaciti.org","Nisl LLC"),(2,"Wyatt","eu@ascelerisquesed.com","Pede Ac Urna Inc."),(1,"Ralph","tellus@nibhQuisquenonummy.edu","Nullam Velit Dui Associates");
 INSERT INTO `users` (`role`,`username`,`email`,`password`) VALUES (0,"Guy","gravida.Aliquam.tincidunt@Namtempordiam.net","Enim LLC"),(2,"Walter","Sed@Nullamlobortisquam.com","Quis Pede Institute"),(2,"Malachi","quis@ascelerisquesed.net","Aliquam Adipiscing Corporation"),(2,"Jerome","fringilla@Sed.co.uk","Mollis Institute"),(0,"Conan","Etiam.bibendum@velitinaliquet.ca","Nisl Maecenas Malesuada Industries"),(1,"Elliott","Nunc.ut@placerateget.net","Tristique Senectus Institute"),(0,"Evan","fermentum.convallis@Fuscediam.edu","Vulputate Consulting"),(2,"Calvin","ullamcorper.Duis@Nullam.com","Non Industries"),(0,"Erasmus","lacinia.vitae@tempor.com","Dictum Eleifend Nunc Associates"),(0,"Tucker","parturient@fringilla.co.uk","Convallis Associates");
@@ -52,3 +55,4 @@ INSERT INTO `posts` (`user_id`,`title`,`body`,`category`,`status`,`image`) VALUE
 INSERT INTO `posts` (`user_id`,`title`,`body`,`category`,`status`,`image`) VALUES (43,"Daihatsu","pasta","health",1,"Chami"),(50,"Fiat","salads","random",0,"Adobe"),(96,"Smart","stews","health",2,"Adobe"),(64,"Volvo","noodles","random",1,"Adobe"),(22,"Mitsubishi Motors","seafood","food",0,"Chami"),(40,"Subaru","sandwiches","random",0,"Adobe"),(64,"BMW","soups","health",0,"Sibelius"),(42,"Honda","noodles","code",0,"Altavista"),(52,"Vauxhall","salads","random",2,"Macromedia"),(12,"JLR","stews","health",0,"Lycos");
 INSERT INTO `posts` (`user_id`,`title`,`body`,`category`,`status`,`image`) VALUES (13,"Skoda","desserts","code",0,"Chami"),(75,"Skoda","desserts","food",2,"Altavista"),(62,"Fiat","cereals","health",0,"Google"),(73,"Porsche","sandwiches","health",1,"Macromedia"),(100,"Seat","stews","food",1,"Borland"),(41,"Volvo","sandwiches","food",0,"Lavasoft"),(20,"Kenworth","soups","science",0,"Lycos"),(50,"Honda","stews","random",1,"Google"),(49,"GMC","soups","science",1,"Google"),(57,"Infiniti","seafood","health",1,"Finale");
 INSERT INTO `posts` (`user_id`,`title`,`body`,`category`,`status`,`image`) VALUES (54,"Ferrari","pasta","code",2,"Chami"),(58,"BMW","salads","code",2,"Adobe"),(10,"Smart","soups","science",0,"Sibelius"),(73,"Maruti Suzuki","seafood","math",0,"Lycos"),(44,"Audi","pasta","health",0,"Borland"),(75,"Chevrolet","cereals","code",1,"Adobe"),(25,"RAM Trucks","desserts","science",1,"Macromedia"),(56,"Lexus","salads","math",2,"Chami"),(77,"Ferrari","seafood","math",1,"Macromedia"),(56,"Citroën","stews","health",1,"Finale");
+

@@ -6,10 +6,11 @@ import java.util.List;
 
 @Entity
 //This tables name should be plural hence the multiple 'users'
-@Table(name="user")
+@Table(name="users")
 public class User {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long id;
 
     @Column(nullable = false, unique = true)
@@ -22,29 +23,18 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private Integer role;
+    private Integer role = 0;
 
+    public User(){
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Post> post;
-
+    }
 
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
-        username = copy.username;
         email = copy.email;
+        username = copy.username;
         password = copy.password;
     }
-
-    public User(long id, String username, String email, String password, int role) {
-        this.id = id;
-        this.username = username;
-        this.role = role;
-        this.email = email;
-        this.password = password;
-    }
-
-//    public User() {}
 
 
     public long getId() {
@@ -79,13 +69,13 @@ public class User {
         this.password = password;
     }
 
-
-    public List<Post> getPost() {
-        return post;
+    public int getRole() {
+        return role;
     }
 
-    public void setPost(List<Post> post) {
-        this.post = post;
+    public void setRole(Integer role) {
+        this.role = role;
     }
+
 
 }

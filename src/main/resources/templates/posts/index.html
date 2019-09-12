@@ -1,33 +1,27 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="partials/header :: header('Your Post')"></div>
+<div th:replace="partials/header :: header('Posts')"></div>
+
 <body>
-<div th:replace="partials/navbar::navbar"></div>
+<th:block th:replace="partials/navbar::navbar"/>
 
 <!--this is where you can see all the entries by all users-->
-<div id='root'>.</div>
 
-
-
-
-<div class="container">
-    <h1 >Look at my post</h1>
-    <!--this is where the posts will be displayed in a list form -->
-    <div class="card" style="width: 18rem;" th:each="post : ${posts}">
-        <img class="card-img-top" src="#" alt="Card image cap"/>
-        <div class="card-body">
-
-            <h5 class="card-title" th:text="${post.title}"></h5>
-            <p class="card-text" th:text="${post.body}" ></p>
-            <a th:href="@{/posts/{id}(id=${post.id})}" class="card-link" >More</a>
+<main class="container">
+    <h1>Look at my post</h1>
+    <div class="card-columns">
+        <!--this is where the posts will be displayed in a list form -->
+        <div class="card post" th:each="post : ${posts}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${post.title}"></h5>
+                <p class="card-text" th:text="${post.body}"></p>
+                <a th:href="@{/posts/{id}(id=${post.id})}" class="card-link">More</a>
+            </div>
         </div>
     </div>
-</div>
+</main>
 
+<th:block th:replace="partials/footer :: footer"></th:block>
 
-
-
-
-<div th:replace="partials/footer :: footer"></div>
 </body>
 </html>

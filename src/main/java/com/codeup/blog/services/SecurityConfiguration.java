@@ -1,20 +1,17 @@
-package com.codeup.blog;
+package com.codeup.blog.services;
 
-import com.codeup.blog.services.UserDetailLoad;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private UserDetailLoad usersLoader;
+    private UserDetailsLoader usersLoader;
 
-    public SecurityConfiguration(UserDetailLoad usersLoader) {
+    public SecurityConfiguration(UserDetailsLoader usersLoader) {
         this.usersLoader = usersLoader;
     }
 
@@ -48,14 +45,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/posts") // anyone can see the home and the ads pages
                 .permitAll()
-                /* Pages that require authentication */
+                /* Pages that require athentication */
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/posts/create", // only authenticated users can create ads
-                        "/posts/{id}/edit" // only authenticated users can edit ads
+                        "/posts/create" // only authenticated users can create ads
                 )
                 .authenticated()
         ;
     }
+
+
 }

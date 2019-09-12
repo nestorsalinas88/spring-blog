@@ -10,13 +10,7 @@
     <!--this is a form to create new posts-->
 
     <form th:action="@{/sign-up}" method="post" th:object="${user}">
-
-        <label for="firstName">first name:</label>
-        <input id="firstName" th:field="*{firstName}"/>
-        <br/>
-        <label for="lastName">last name:</label>
-        <input id="lastName" th:field="*{lastName}"/>
-        <br/>
+        
         <label for="username">Username</label>
         <input id="username" th:field="*{username}" />
         <br/>

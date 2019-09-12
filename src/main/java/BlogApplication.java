@@ -1,10 +1,11 @@
 package com.codeup.blog;
 
+import static org.springframework.boot.SpringApplication.run;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import static org.springframework.boot.SpringApplication.*;
+import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 public class BlogApplication {
 
 	public static void main(String[] args) {

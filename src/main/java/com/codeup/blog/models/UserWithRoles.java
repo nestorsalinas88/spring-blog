@@ -3,19 +3,28 @@ package com.codeup.blog.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 
-public class UserWithRoles extends User implements UserDetails{
+public class UserWithRoles extends User implements UserDetails {
 
-    public UserWithRoles(User user) {
-        super(user);  // Call the copy constructor defined in User
+    public UserWithRoles(User user){
+        super(user);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = ""; // Since we're not using the authorization part of the component
+        String roles = "";
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
     }
 
     @Override
@@ -37,5 +46,4 @@ public class UserWithRoles extends User implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-
 }
