@@ -1,6 +1,5 @@
 package com.codeup.blog.controllers;
 
-
 import com.codeup.blog.models.User;
 import com.codeup.blog.repositories.UserRepo;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,31 +11,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
-    private User user;
-//    private PasswordEncoder passwordEncoder;
+    private UserRepo users;
+    private PasswordEncoder passwordEncoder;
 
 
-    public UserController(UserRepo users) {
-        this.user = user;
+    public UserController(UserRepo users, PasswordEncoder passwordEncoder) {
+        this.users = users;
+        this.passwordEncoder = passwordEncoder;
 
     }
 
-    @GetMapping("/login")
-    public String login(Model model){
-        return "users/login";
+    @GetMapping("/sign-up")
+    public String showSignupForm(Model viewModel){
+        viewModel.addAttribute("user", new User());
+        return "users/sign-up";
     }
 
-//    @GetMapping("/sign-up")
-//    public String showSignupForm(Model model){
-//        model.addAttribute("user", new User());
-//        return "users/sign-up";
-//    }
-
-//    @PostMapping("/sign-up")
-//    public String saveUser(@ModelAttribute User user){
-//        String hash = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(hash);
-//        users.save(user);
-//        return "redirect:/login";
-//    }
+    @PostMapping("/sign-up")
+    public String saveUser(@ModelAttribute User user){
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
+        user.setRole(0);
+        users.save(user);
+        return "redirect:/login";
+    }
 }
